@@ -1,0 +1,249 @@
+	
+	public void KeyboardListener(){
+		while(Keyboard.next()){
+			if(Keyboard.getEventKeyState()){
+				if(Keyboard.getEventKey() == Keyboard.KEY_RIGHT){
+					System.out.println("Go RIGHT !");
+				}else if(Keyboard.getEventKey() == Keyboard.KEY_LEFT){
+					System.out.println("Go LEFT !");
+				}else if(Keyboard.getEventKey() == Keyboard.KEY_UP){
+					System.out.println("Go UP !");
+				}else if(Keyboard.getEventKey() == Keyboard.KEY_DOWN){
+					System.out.println("Go DOWN !");
+				}else if(Keyboard.getEventKey() == Keyboard.KEY_ESCAPE){
+					Display.destroy();
+				}
+			}
+		}
+	}
+	
+		public void RenderGL(int i){
+		if(i == 0){
+			GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
+			GL11.glColor3f(1.0f, 1.0f, 1.0f);
+			JTextRenderer.drawString("FPS: "+current_fps, 10, h - 20);
+			GL11.glColor3f(0.5f, 0.5f, 1.0f);
+			GL11.glTranslatef(x, y, 0);
+			//GL11.glRotatef(rotation, 0f, 0f, 1f);
+			GL11.glTranslatef(-x, -y, 0);
+			GL11.glBegin(GL11.GL_QUADS);
+			GL11.glVertex2f(x - modif, y - modif);
+			GL11.glVertex2f(x + modif, y - modif);
+			GL11.glVertex2f(x + modif, y + modif);
+			GL11.glVertex2f(x - modif, y + modif);
+			GL11.glEnd();
+		}else if(i == 1){
+			GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
+			GL11.glColor3f(0.0f, 1.0f, 0.0f);
+			GL11.glBegin(GL11.GL_QUADS);
+			GL11.glVertex2f(000,000);
+			GL11.glVertex2f(w,000);
+			GL11.glVertex2f(w,h);
+			GL11.glVertex2f(000,h);
+			GL11.glEnd();
+		}else if(i == 2){
+			
+		}
+
+	}
+	
+		public void updateInGame(int delta){
+		if (Keyboard.isKeyDown(Keyboard.KEY_LEFT)) x -= 0.35f * delta;
+		if (Keyboard.isKeyDown(Keyboard.KEY_RIGHT)) x += 0.35f * delta;
+		if (Keyboard.isKeyDown(Keyboard.KEY_DOWN)) y -= 0.35f * delta;
+		if (Keyboard.isKeyDown(Keyboard.KEY_UP)) y += 0.35f * delta;
+		x = GObjectManager.getXBounds(x,w,modif);
+		y = GObjectManager.getYBounds(y,h,modif);
+	}
+	
+	if(box.intersects(box3)){
+				if(box.getDX() == -0.2){//BOX1 with BOX3
+					box.setDX(0.2);
+				}else{
+					box.setDX(-0.2);
+				}
+				if(box3.getDY() == -0.2){//BOX3 with BOX1
+					box3.setDY(0.2);
+				}else{
+					box3.setDY(-0.2);
+				}
+			}
+			if(box4.intersects(box3)){
+				if(box4.getDX() == -0.2){//BOX3 with BOX4
+					box4.setDX(0.2);
+				}else{
+					box4.setDX(-0.2);
+				}
+				if(box3.getDY() == -0.2){//BOX4 with BOX3
+					box3.setDY(0.2);
+				}else{
+					box3.setDY(-0.2);
+				}
+			}
+			if(box.intersects(box2)){
+				if(box.getDX() == -0.2){//BOX1 with BOX2
+					box.setDX(0.2);
+				}else{
+					box.setDX(-0.2);
+				}
+				if(box2.getDY() == -0.2){//BOX2 with BOX1
+					box2.setDY(0.2);
+				}else{
+					box2.setDY(-0.2);
+				}
+			}
+			if(box4.intersects(box2)){
+				if(box4.getDX() == -0.2){//BOX2 with BOX4
+					box4.setDX(0.2);
+				}else{
+					box4.setDX(-0.2);
+				}
+				if(box2.getDY() == -0.2){//BOX4 with BOX2
+					box2.setDY(0.2);
+				}else{
+					box2.setDY(-0.2);
+				}
+			}
+			if(box2.intersects(box3)){
+				if(box2.getDY() == -0.2){//BOX2 with BOX3
+					box2.setDY(0.2);
+				}else{
+					box2.setDY(-0.2);
+				}
+				if(box3.getDY() == -0.2){//BOX2 with BOX3
+					box3.setDY(0.2);
+				}else{
+					box3.setDY(-0.2);
+				}
+			}
+			if((box1.getX()+box1.getWidth()) > 640){//BOX1 with frame
+				box1.setDX(-0.2);
+			}
+			if(box1.getX() < 0){//BOX1 with frame
+				box1.setDX(0.2);
+			}
+			if(box.intersects(point)){//BOX1 with MOUSE
+				box.setDX(0.2);
+			}
+			if((box.getX()+box.getWidth()) > 640){//BOX1 with frame
+				box.setDX(-0.2);
+			}
+			if(box.getX() < 0){//BOX1 with frame
+				box.setDX(0.2);
+			}
+			if(box4.intersects(point)){//BOX4 with MOUSE
+				box4.setDX(0.2);
+			}
+			if((box4.getX()+box4.getWidth()) > 640){//BOX4 with frame
+				box4.setDX(-0.2);
+			}
+			if(box4.getX() < 0){//BOX4 with frame
+				box4.setDX(0.2);
+			}
+			if(box2.intersects(point)){//BOX2 with MOUSE
+				box2.setDY(0.2);
+			}
+			if(box2.getY()+box2.getHeight() > 480){//BOX2 with frame
+				box2.setDY(-0.2);
+			}
+			if(box2.getY() < 0){//BOX2 with frame
+				box2.setDY(0.2);
+			}
+			if(box3.intersects(point)){//BOX3 with MOUSE
+				box3.setDY(0.2);
+			}
+			if(box3.getY()+box3.getHeight() > 480){//BOX3 with frame
+				box3.setDY(-0.2);
+			}
+			if(box3.getY() < 0){//BOX43 with frame
+				box3.setDY(0.2);
+			}
+			
+						glBegin(GL_POINTS);
+			for (Point p : points){
+				glVertex3f(p.x, p.y, p.z);
+			}
+			glEnd();
+			
+			glTranslatef(position.x, position.y, position.z);
+			
+			if(Keyboard.isKeyDown(Keyboard.KEY_A)){
+				position.x += 0.01f;
+			}
+			if(Keyboard.isKeyDown(Keyboard.KEY_D)){
+				position.x -= 0.01f;
+			}
+			if(Keyboard.isKeyDown(Keyboard.KEY_W)){
+				position.z += 0.01f;
+			}
+			if(Keyboard.isKeyDown(Keyboard.KEY_S)){
+				position.z -= 0.01f;
+			}
+			if(Keyboard.isKeyDown(Keyboard.KEY_DOWN)){
+				position.y += 0.01f;
+			}
+			if(Keyboard.isKeyDown(Keyboard.KEY_UP)){
+				position.y -= 0.01f;
+			}	
+			
+			while(Keyboard.next()){
+				if(Keyboard.isKeyDown(Keyboard.KEY_SPACE)){
+					position.x = 0f;
+					position.y = 0f;
+					position.z = 0f;
+				}
+				if(Keyboard.isKeyDown(Keyboard.KEY_C)){
+					position.x = 0;
+					position.y = 0;
+					position.z = 0;
+					glLoadIdentity();
+				}
+			}
+			
+					Point[] points = new Point[10000];
+		Random random = new Random();
+		
+		for(int i = 0; i < points.length; i ++){
+			points[i] = new Point((random.nextFloat() - 0.5f) * 100f,(random.nextFloat() - 0.5f) * 100f, random.nextInt(200) - 200);
+		}
+		
+			public void initOpenGL(INITGL MODE, int WIDTH, int HEIGHT){
+		switch(MODE){
+			case GLU:
+				glMatrixMode(GL_PROJECTION);
+				glLoadIdentity();
+				gluPerspective((float) 30, 640f / 480f, 0.001f, 1000);
+				glMatrixMode(GL_MODELVIEW);
+		        glEnable(GL_DEPTH_TEST);        
+		        glEnable(GL_TEXTURE_2D);        
+		        glEnable(GL_BLEND);       
+		        glEnable(GL_ALPHA_TEST);      
+		        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);   
+		        glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);   
+		        glEnable(GL_CULL_FACE);     
+		        glCullFace(GL_BACK);        
+		        //glEnable(GL_FOG);
+				break;
+			case SIMPLE:
+				glEnable(GL_TEXTURE_2D);       
+				glEnable(GL_BLEND);
+				glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+				glEnable(GL_TEXTURE_2D);
+				glShadeModel(GL_SMOOTH);
+				glClearColor(0.0f, 0.0f, 0.0f, 0.0f);          
+				glClearDepth(1.0f);
+		        glEnable(GL_BLEND);
+		        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		        glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
+		        glViewport(0,0,WIDTH,HEIGHT);
+		 
+				glMatrixMode(GL_PROJECTION);
+				glLoadIdentity();
+				glOrtho(0, WIDTH, 0, HEIGHT, 1, -1);
+				glMatrixMode(GL_MODELVIEW);
+
+				break;
+			case ADVANCED:
+				break;
+		}		
+	}

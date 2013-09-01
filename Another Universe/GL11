@@ -1,0 +1,53 @@
+If You don't want to write GL11 before all 'GL11 commands' you need to
+import this: 
+
+org.lwjgl.opengl.GL11.*;
+org.lwjgl.opengl.GL11;
+
+LWJGL too needs to be initialized before You will draw anything on the 
+screen, so for this you need this lines:
+
+glMatrixMode(GL_PROJECTION);
+glLoadIdentity();
+
+If you want to be upper-left corner like 0, 0 then you need:
+
+glOrtho(0, WIDTH, HEIGHT, 0, 1, -1);
+
+In other way you need this:
+
+glOrtho(0, WIDTH, 0, HEIGHT, 1, -1);
+
+And of course the WIDTH and HEIGHT is the 'frame resolution'
+
+And finally this:
+
+glMatrixMode(GL_MODELVIEW);
+
+Basically the first argument is x value in left side, second argument x value in right side,
+third argument is the bottom y value and fourth argument is the top y value.
+
+Or you can pack the functions into function with some needed arguments:
+
+public void init(int WIDTH, int HEIGHT, boolean INVERTED){
+	if(!INVERTED){
+		glMatrixMode(GL_PROJECTION);
+		glLoadIdentity();
+		glOrtho(0, WIDTH, 0, HEIGHT, 1, -1);
+		glMatrixMode(GL_MODELVIEW);
+	}else{
+		glMatrixMode(GL_PROJECTION);
+		glLoadIdentity();
+		glOrtho(0, WIDTH, HEIGHT, 0, 1, -1);
+		glMatrixMode(GL_MODELVIEW);
+	}
+}
+
+If you want to clear the LWJGL ' 2D canvas' you need this before you draw
+something else:
+
+glClear(GL_COLOR_BUFFER_BIT);
+
+If you want to clear the '3D canvas' you need to use:
+
+glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

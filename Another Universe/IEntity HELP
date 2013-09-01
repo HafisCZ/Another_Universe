@@ -1,0 +1,151 @@
+Hello, I am MAR21, and I am programming in Java, C/C++, Python 2.7 ...
+And I want to present you my own 2D game IEntity engine. It is really cool and easy to use.
+To create your own entity with this engine you need know these arguments:
+
+BASICS:
+
+1) Where will be entity displayed when game starts. (X cord and Y cord)
+2) What will be the width and height of the entity. (This can be replaced 
+	with getImageWidth() and getImageHeight() of the entity texture)
+3) You need to know your 'bounds' of game, which can be the Window height and width.
+4) You need to have your texture (only one need), but you want to have 3 different
+	textures for different moves, this can be enabled with calling the setMoveTextures()
+	function which takes 3 arguments, the left moving texture, stay texture and right moving texture.
+5) You need to know how much will gravity be 'strong' in float.
+6) You need to know the walking and the flying speed.
+7) You need to know how much additional modifiers you need. You can do it after creating new
+	instance of the IEntity with the flushControlls() function with one argument - the modifier allocation.
+	There are different types of keyboard additional modifiers:
+		1) addController(KEY, FUNCTION, POSITION, IEntity.KEYBOARD.STABLE);
+		2) addController(KEY, FUNCTION, POSITION, IEntity.KEYBOARD.INSTANT);
+	Some types of mouse modifiers:
+		1) addController(MOUSE, FUNCTION, POSITION, IEntity.KEYBOARD.MOUSE);
+	And of course now test-only binding modifiers which allows you to bind function to IEntity actions.
+8) Of course there is ability to turn on IEntity to be controlled by computer.
+
+So the initialization function can be:
+
+IEntity player = new IEntity(0, 0, 32, 64, 640, 480, tex_player, 0.5F, 0.5F, 0.8F, 4, true);
+
+We creating new instance of IEntity with name player with these arguments:
+1) Entity spawn at X cord 0.
+2) Entity spawn at Y cord 0.
+3) Entity width is 32.
+4) Entity height is 64.
+5) Maximum reachable X cord is 640.
+6) Maximum reachable Y cord is 480.
+7) Entity texture is 'tex_entity'.
+8) Entity gravity is 0.5F.
+9) Entity speed is 0.5F.
+10) Entity flying speed is 0.8F.
+11) Allocate 4 slots for modifiers.
+12) Controlled by controller not computer.
+
+And we will set up this modifier for it:
+
+player.addController(Keyboard.KEY_UP, IEntity.CONTROL.UPFLY, 0, IEntity.KEYBOARD.STABLE);
+
+So we adding to slot 0 (Third argument) new controller with arguments:
+
+1) When we press the Keyboard.KEY_UP key the controller will call function with second argument.
+2) This argument is defining what action the key will do. So it can be: IEntity.CONTROL.DOWNFLY or .RIGHTWALK
+	or other different actions.
+3) We adding the controller to the null slot of the IEntity instance player.
+4) We want to loop the function as long as we pressing the key.
+	There are 2 types: IEntity.KEYBOARD.STABLE or .INSTANT. The Instant will only run the function one time,
+	instead of Stable, which will loop the function as we holding the key.
+
+And finally we need to update and draw the IEntity instance player. So we need to place this into the game loop:
+
+player.update(delta);
+
+The delta argument is the 'Delta'.
+
+OPTIONAL:
+
+You also turn on/off gravity on specified IEntity instances with this function:
+
+instance.setGravity(true/false);
+
+And also this function takes gravity 'strong' as an float argument:
+
+instance.setGravity(0.5F);
+
+Or obtain the gravity 'strong':
+
+instance.getGravity();
+
+Or obtain boolean of gravity enabled or disabled:
+
+instance.isGravity();
+
+You can set the X,Y cord and the width,height with these functions:
+
+instance.setX(x);
+instance.setY(y);
+instance.setWidth(w);
+instance.setHeight(h);
+
+And obtain these values:
+
+instance.getX();
+instance.getY();
+instance.getWidth();
+instance.getHeight();
+
+You can turn on/off the bordering with this:
+
+instance.setBordered(true/false);
+
+Or obtain the border values with:
+
+instance.getBorder();
+
+And add the borders:
+
+instance.setBorder(x,y,max_x,max_y);
+
+Of course is possible to set all textures:
+
+instance.setTexture(WhenLookingForward);
+instance.setRightTexture(WhenGoingRight);
+instance.setLeftTexture(WhenGoingLeft);
+
+And obtain the textures:
+
+instance.getTexture();
+instance.getRightTexture();
+instance.getLeftTexture();
+
+You can edit or obtain the Fly and Walk speed:
+
+instance.setSpeed(s);
+instance.getSpeed();
+instance.setFlySpeed(s);
+instance.getFlySpeed();
+
+And you can edit the bottom border with:
+
+instance.setMinimalY(y);
+instance.getMinimalY();
+
+You can too edit the frame Width and Height:
+
+instance.setFrameHeight(h);
+instance.getFrameHeight();
+instance.setFrameWidht(w);
+instance.getFrameWidht();
+
+If you have computer controlled IEntity instance you can pause it:
+
+instance.pauseEntity(true/false);
+instance.isPaused();
+
+And turn on and off the computer controller:
+
+instance.setPlayable(true/false);
+instance.isPlayable();
+
+TEST-ONLY:
+
+There is private setComputerController() but it dont do anything 'cause of broken code !
