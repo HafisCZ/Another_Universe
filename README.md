@@ -1,4 +1,6 @@
 Another_Universe
 ================
 
-LWJGL Java Based 3D Space Game
+Java Based 3D Space Game
+
+This game is created using the original JWLGL Library : http://www.lwjgl.org/
